@@ -72,6 +72,7 @@ const ConstMap<int, std::string> AKAZEDescriptorTypeInv = ConstMap <int, std::st
     (cv::AKAZE::DESCRIPTOR_MLDB_UPRIGHT, "MLDBUpright")
     (cv::AKAZE::DESCRIPTOR_MLDB,         "MLDB");
 
+#ifdef HAVE_OPENCV_XFEATURES2D
 /// AGAST neighborhood types
 const ConstMap<std::string, int> AgastTypeMap = ConstMap<std::string, int>
     ("AGAST_5_8",   cv::AgastFeatureDetector::AGAST_5_8)
@@ -86,7 +87,6 @@ const ConstMap<int, std::string> AgastTypeInvMap = ConstMap<int, std::string>
     (cv::AgastFeatureDetector::AGAST_7_12s, "AGAST_7_12s")
     (cv::AgastFeatureDetector::OAST_9_16,   "OAST_9_16");
 
-#ifdef HAVE_OPENCV_XFEATURES2D
 /// DAISY normalization types
 const ConstMap<std::string, int> DAISYNormType = ConstMap<std::string, int>
     ("None",    cv::xfeatures2d::DAISY::NRM_NONE)
@@ -174,6 +174,7 @@ cv::Ptr<cv::AKAZE> createAKAZE(
     std::vector<MxArray>::const_iterator first,
     std::vector<MxArray>::const_iterator last);
 
+#ifdef HAVE_OPENCV_XFEATURES2D
 /** Create an instance of AgastFeatureDetector using options in arguments
  * @param first iterator at the beginning of the vector range
  * @param last iterator at the end of the vector range
@@ -183,7 +184,6 @@ cv::Ptr<cv::AgastFeatureDetector> createAgastFeatureDetector(
     std::vector<MxArray>::const_iterator first,
     std::vector<MxArray>::const_iterator last);
 
-#ifdef HAVE_OPENCV_XFEATURES2D
 /** Create an instance of SIFT using options in arguments
  * @param first iterator at the beginning of the vector range
  * @param last iterator at the end of the vector range
@@ -267,7 +267,7 @@ cv::Ptr<cv::xfeatures2d::DAISY> createDAISY(
  *    - "SimpleBlobDetector"
  *    - "KAZE"
  *    - "AKAZE"
- *    - "AgastFeatureDetector"
+ *    - "AgastFeatureDetector" (requires `xfeatures2d` module)
  *    - "SIFT" (requires `xfeatures2d` module)
  *    - "SURF" (requires `xfeatures2d` module)
  *    - "StarDetector" (requires `xfeatures2d` module)

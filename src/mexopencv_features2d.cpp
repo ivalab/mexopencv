@@ -344,6 +344,7 @@ Ptr<AKAZE> createAKAZE(
         threshold, nOctaves, nOctaveLayers, diffusivity);
 }
 
+#ifdef HAVE_OPENCV_XFEATURES2D
 Ptr<AgastFeatureDetector> createAgastFeatureDetector(
     vector<MxArray>::const_iterator first,
     vector<MxArray>::const_iterator last)
@@ -369,7 +370,6 @@ Ptr<AgastFeatureDetector> createAgastFeatureDetector(
     return AgastFeatureDetector::create(threshold, nonmaxSuppression, type);
 }
 
-#ifdef HAVE_OPENCV_XFEATURES2D
 Ptr<SIFT> createSIFT(
     vector<MxArray>::const_iterator first,
     vector<MxArray>::const_iterator last)
@@ -630,9 +630,9 @@ Ptr<FeatureDetector> createFeatureDetector(string type,
         p = createKAZE(first, last);
     else if (type == "AKAZE")
         p = createAKAZE(first, last);
+#ifdef HAVE_OPENCV_XFEATURES2D
     else if (type == "AgastFeatureDetector")
         p = createAgastFeatureDetector(first, last);
-#ifdef HAVE_OPENCV_XFEATURES2D
     else if (type == "SIFT")
         p = createSIFT(first, last);
     else if (type == "SURF")
